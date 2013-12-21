@@ -59,7 +59,7 @@ render = ->
   el = createFromHTML TEMPLATE
   document.body.appendChild el
 
-  if Offline.reconnect?
+  if Offline.reconnect? and Offline.getOption('reconnect')
     el.appendChild createFromHTML RETRY_TEMPLATE
 
     button = el.querySelector('.offline-ui-retry')
@@ -121,7 +121,7 @@ init = ->
     flashClass 'offline-ui-reconnect-succeeded-2s', 2
     flashClass 'offline-ui-reconnect-succeeded-5s', 5
 
-if document.readyState in ['interactive', 'complete']
+if document.readyState is 'complete'
   init()
 else if document.addEventListener?
   document.addEventListener 'DOMContentLoaded', init, false
